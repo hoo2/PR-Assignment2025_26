@@ -223,9 +223,9 @@ if __name__ == "__main__":
     - estimate Gaussian parameters (MLE) per class
     - plot 3D pdf surfaces
     """
-    df = load_csv(dataset1, header=None)
+    df1 = load_csv(dataset1, header=None)
 
-    X, y, classes = split_dataset_by_class(df)
+    X, y, classes = split_dataset_by_class(df1)
     params = estimate_gaussians_mle(classes)
 
     # Optional parameters printing

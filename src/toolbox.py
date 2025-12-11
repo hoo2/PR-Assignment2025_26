@@ -1,6 +1,10 @@
-# -----------------------------
-# Toolbox
-# -----------------------------
+# ------------------------------------------------------------
+# Common tools for the entire assignment
+#
+# Author:
+#   Christos Choutouridis (ΑΕΜ 8997)
+#   cchoutou@ece.auth.gr
+# ------------------------------------------------------------
 
 import pandas as pd
 
@@ -8,10 +12,12 @@ import pandas as pd
 def github_raw(user, repo, branch, path):
     return f"https://raw.githubusercontent.com/{user}/{repo}/{branch}/{path}"
 
-dataset1 = (github_raw("hoo2", "PR-Assignment2025_26", "master", "datasets/dataset1.csv"))
-dataset2 = (github_raw("hoo2", "PR-Assignment2025_26", "master", "datasets/dataset2.csv"))
-dataset3 = (github_raw("hoo2", "PR-Assignment2025_26", "master", "datasets/dataset3.csv"))
-testset = (github_raw("hoo2", "PR-Assignment2025_26", "master", "datasets/testset.csv"))
+
+dataset1 = github_raw("hoo2", "PR-Assignment2025_26", "master", "datasets/dataset1.csv")
+dataset2 = github_raw("hoo2", "PR-Assignment2025_26", "master", "datasets/dataset2.csv")
+dataset3 = github_raw("hoo2", "PR-Assignment2025_26", "master", "datasets/dataset3.csv")
+testset  = github_raw("hoo2", "PR-Assignment2025_26", "master", "datasets/testset.csv")
+
 
 def load_csv(path, header=None):
     """
