@@ -198,7 +198,9 @@ def mse(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     Parameters
     ----------
     y_true : ndarray
+        actual labels array
     y_pred : ndarray
+        predicted labels array
 
     Returns
     -------
@@ -257,8 +259,11 @@ def plot_h_vs_error(h_values: np.ndarray, errors: np.ndarray, title: str) -> Non
     Parameters
     ----------
     h_values : ndarray
+        bandwith values
     errors : ndarray
+        error values
     title : str
+        title
     """
     plt.figure(figsize=(8, 5))
     plt.plot(h_values, errors, marker='o')
@@ -274,6 +279,17 @@ def plot_histogram_with_pdf(
 ) -> None:
     """
     Plots a histogram of the data and overlays the true N(mu_true, var_true) pdf.
+
+    Parameters
+    ----------
+    data : ndarray
+        1D data samples.
+    mu_true : float
+        True mean, default to 1.0.
+    var_true : float
+        True variance, default to 4.0.
+    bins : int
+        number of bins, default to 30.
     """
     plt.figure(figsize=(8, 5))
 

@@ -1,45 +1,29 @@
+# ------------------------------------------------------------
+# Part A - Gaussian Parameter Estimation (MLE) & Visualization
+# Pattern Recognition – Semester Assignment
+#
+# Author:
+#   Christos Choutouridis (ΑΕΜ 8997)
+#   cchoutou@ece.auth.gr
+#
+# Description:
+#   This module implements Part A of the assignment:
+#   - Loading and splitting the dataset into classes
+#   - MLE estimation of mean vectors and covariance matrices
+#   - Construction of Gaussian pdf surfaces
+#   - 3D visualization of class-conditional densities
+#
+# Notes:
+#   The implementation follows the theoretical formulation of
+#   multivariate Gaussian distributions and MLE parameter
+#   estimation as taught in class.
+# ------------------------------------------------------------
+
 import matplotlib.pyplot as plt
 import numpy as np
-from toolbox import *
+from toolbox import load_csv, split_dataset_by_class, dataset1
 
 from typing import Tuple, Dict
-from pandas import DataFrame
-
-
-# --------------------------------------------------
-# Part A: dataset splitting
-# --------------------------------------------------
-def split_dataset_by_class(df: DataFrame) -> Tuple[np.ndarray, np.ndarray, Dict[int, np.ndarray]]:
-    """
-    Splits a dataset into features, labels and per-class subsets with the assumptions that:
-    - All columns except the last are feature columns.
-    - The last column is the class label.
-
-    Parameters
-    ----------
-    df: DataFrame
-        Data samples as DataFrame.
-
-    Returns
-    -------
-    X : ndarray, shape (N, d), y : ndarray, shape (N,),   classes : dict:
-        Feature matrix,
-        Labels,
-        Dictionary mapping each class label to the subset of X that belongs to that class.
-
-    Example
-    -------
-        X, y, classes = split_dataset_by_class(df)
-    """
-    n_cols = df.shape[1]                # Number of columns
-    X = df.iloc[:, :n_cols - 1].values  # Features = all columns except last
-    y = df.iloc[:, n_cols - 1].values   # Labels = last column
-
-    # Dictionary that maps class -> samples
-    classes = {c: X[y == c] for c in np.unique(y) }
-
-    return X, y, classes
-
 
 def mle_mean(X: np.ndarray) -> np.ndarray:
     """
@@ -159,10 +143,13 @@ def compute_gaussian_grid(
 
     Returns
     -------
-    Xgrid, Ygrid, Z : ndarray, shape (grid_size, grid_size, grid_size)
-        X Meshgrid coordinates for dimensions 0 and 1,
-        Y Meshgrid coordinates for dimensions 0 and 1,
-        pdf values at each grid point.
+    tuple:
+        Xgrid: ndarray, shape (grid_size)
+            X Meshgrid coordinates for dimensions 0 and 1
+        Ygrid: ndarray, shape (grid_size)
+            Y Meshgrid coordinates for dimensions 0 and 1,
+        Z: ndarray, shape (grid_size)
+            pdf values at each grid point.
     """
     # Range only on the first two dimensions
     x_vals = np.linspace(np.min(X[:, 0]), np.max(X[:, 0]), grid_size)
